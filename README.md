@@ -105,4 +105,4 @@ Warnings:
 strong multicollinearity or other numerical problems.
 ```
 
-## 4. Other Machine Learning Model and Results.
+## 4. [Other Machine Learning Model and Results](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/vehicle_range_prediction.ipynb)
