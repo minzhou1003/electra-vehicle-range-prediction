@@ -22,7 +22,7 @@ The dataset we are using for this project is provided by Electra Vehicle, which 
 ![system_diagram](figs/system_diagram.png)
 
 # Methods:
-We approach the solution by using Decision Tree, Random Forest, Naive Bayes, Support Vector Regression and K-Nearest Neighbors, and OLS algorithms to train different regression models. We applied the trained models to predict the vehicle range, and compared them based on MAE, MSE and R-squre Score.
+We approach the solution by using Decision Tree, Random Forest, Support Vector Regression and K-Nearest Neighbors, and Linear regression algorithms to train different models. Multiple models are compared and we selected the most robust trained models to predict the vehicle range, and compared them based on MAE, MSE and R-squre Score.
 
 # Input and Output:
 ## Input variables
@@ -105,4 +105,33 @@ Warnings:
 strong multicollinearity or other numerical problems.
 ```
 
-## 4. [Other Machine Learning Model and Results](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/vehicle_range_prediction.ipynb)
+## 4. Other Machine Learning Model and Results.
+
+
+## API sample output:
+```
+$ python vehicle_prediction.py 
+Please put the JSON file to "new_data" folder.
+
+Select the model:
+1. RandomForest 2. KNN 3. DecisionTree 4.OLS
+1
+
+Enter the number of JSON files you would like to predict: 3
+rf_model.sav loaded!
+
+JSON file path saved.
+new_data/110782058312546990342664573987452969510_5900.0_60.0_0.4000000000000001
+new_data/110782058312546990342664573987452969510_5900.0_60.0_0.2
+new_data/110782058312546990342664573987452969510_5900.0_60.0_0.5000000000000001
+
+Successfully read the JSON file.
+
+Successfully extracted the 14 features, and the input shape: (3, 14).
+
+The predicted system range is 363.1661751390961.
+
+The predicted system range is 363.22721869907997.
+
+The predicted system range is 363.0744924921793.
+```
