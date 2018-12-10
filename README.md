@@ -80,29 +80,13 @@ The partial regression visulization:
 
 # Vehicle Prediction API:
 ## Installation:
-### 1. Download this repository:
 ```
 git clone https://github.com/minzhou1003/electra-vehicle-range-prediction.git
-```
-
-### 2. Set up and activate virtualenv inside that folder.
-```
 cd electra-vehicle-range-prediction
-virtualenv --python python3 env
-source env/bin/activate
-```
-
-### 3. Install python libraries:
-```
-pip install -r requirements.txt
-```
-
-### 4. Run the code:
-```
 python vehicle_prediction.py
 ```
 
-### 5. API sample output:
+## API sample output:
 ```
 $ python vehicle_prediction.py 
 Please put the JSON file to "new_data" folder.
