@@ -12,42 +12,47 @@ Electra Vehicles Inc:
 - Fabrizio Martini(fmartini@electravehicles.com )
 - Jake Berliner(jberliner@electravehicles.com )
 
+# File Instructions:
+- `vehicle_range_prediction.ipynb` is the Jupyter Notebook for developing models
+- `vehicle_prediction.py` is the python script of prediction API
+- `trained_models` folder contains all trained models
+- `new_data` folder contains sample input JSON files
+- `figs` folder contains some useful images
+- `docs` folder contains [poster](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/eletra_poster.pdf) and final report.
+
+
+# Introduction:
+Electra Vehicles, Inc. is an innovative Boston-based startup developing and designing intelligent control software for energy storage systems. What sets Electra Vehicles apart is the ability to design and control dual chemistry systems through our Ai-based control algorithms. Electra was one of the top-26 teams at the MassChallenge startup incubator in 2016 and is a part of the Massachusetts Clean Energy Center's AccelerateMass program to support the adoption of innovative clean technology in Massachusetts. In this project, we are working with Electra Vehicles on predicting electric vehicle range from provided system specifications. The vehicle range is defined as how far can you drive on a full charge. However, there are uncertainties that make this difficult.
+
 # Objectives:
-Considering the specifications of the energy storage system, the vehicle mod- eling parameters, and the simulated vehicle operating conditions, our goal is to project the resultant simulated vehicle range without performing a detailed cycle analysis. The resulting models will be generated for each of the supplied EPA driving cycles, and will account for any possible simulated vehicle or energy storage system. As vehicle range is a nonlinear factor, as opposed to system cost, system power, and system range, such a calculation would serve to bet- ter estimate all core energy storage system specifications prior to performing a detailed electrochemical analysis.
+Considering the specifications of the energy storage system, the vehicle modeling parameters, and the simulated vehicle operating conditions, our goal is to project the resultant simulated vehicle range without performing a detailed cycle analysis. The resulting models will be generated for each of the supplied EPA driving cycles, and will account for any possible simulated vehicle or energy storage system. As vehicle range is a nonlinear factor, as opposed to system cost, system power, and system range, such a calculation would serve to better estimate all core energy storage system specifications prior to performing a detailed electrochemical analysis.
 
 # Dataset:
-The dataset we are using for this project is provided by Electra Vehicle, which contains 680 JSON files in total and each JSON file documented a use case with system specification (specs and numbers of HPU and HEU), the power distribution and the specs of the vehicle using for testing. More data will be imported if necessary.
+The raw dataset is collected from Amazon S3 Buckets in JSON format provided by Electra Vehicles. We transformed 20,000 JSON files to Pandas DataFrame and split the dataset into 13,400 training examples and 6,600 test examples to train and evaluate our model.
 
 # System Disgram:
 ![system_diagram](figs/system_diagram.png)
 
 # Methods:
-We approach the solution by using Decision Tree, Random Forest, Support Vector Regression and K-Nearest Neighbors, and Linear regression algorithms to train different models. Multiple models are compared and we selected the most robust trained models to predict the vehicle range, and compared them based on MAE, MSE and R-squre Score.
+We approach the solution by using Random Forest, Decision Tree, K-Nearest Neighbors Regression, and Ordinary Least Squares algorithms to train 4 different regression models. The trained models are used to predict the vehicle range given the specific input, and we compared them using commonly used regression evaluation metrics: MAE (Mean Absolute Error), MSE (Mean Squared Error) and R-Squared Score. 
 
 # Input and Output:
 ## Input variables
-HEU and HPU specifications:
-- system_cost
-- system_weight
-- num_HEU
-- num_HPU
-- HEU_nominal_energy
-- HPU_nominal_energy
-- HEU_cost (cost per cell)
-- HPU_cost (cost per cell)
-- HEU_weight (cell_mass)
-- HPU_weight (cell_mass)
-- HEU_max_power
-- HPU_max_power
-- dP_threshold
-
-vehicle input variables:
-
-- chassis_Mass_Min_Battery_Mass
-- drag_Resistance
-- frontal_area
-- rolling_resistance
-- power_Train_Eff
+- num_HEU,
+- num_HPU,
+- dP_threshold,
+- system_range,
+- HPU_nominal_energy,
+- HEU_nominal_energy,
+- vehicle_chassisMassMinBatteryMass,
+- vehicle_dragResistance,
+- vehicle_frontalArea,
+- vehicle_rollingResistance,
+- HPU_power_per_kg,
+- HEU_power_per_kg,
+- HPU_cost_per_kw,
+- HEU_cost_per_kw,
+- system_cost_per_kg
 
 ## Output
 * system_range
@@ -60,55 +65,44 @@ Only showing the absolute coefficients above 0.65, otherwise 0.
 
 ## 2. Significant features:
 
-After analyzing the confidence intervals and significance, we got 6 important features:
-- system_cost
-- system_weight
-- dP_threshold
-- HEU_cost_per_cell
-- HEU_nominal_energy
-- vehicle_chassisMassMinBatteryMass
+By using statistical methods, we compared the importance of each feature as follows:
+![feature_importances](figs/feature_importance.png)
 
-![import_features](figs/important_features.png)
+We also presented the top 12 feature distributions respects to system range:
+![features](figs/features.png)
 
-## 3. OLS Linear Regression Model with significant features:
+## 4. Model Perfomance Comparison:
+![models](figs/models.png)
+
+## 3. OLS Linear Regression Model
+The partial regression visulization:
+![partregress_grid](figs/partregress_grid.png)
+
+# Vehicle Prediction API:
+## Installation:
+### 1. Download this repository:
 ```
-                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                      y   R-squared:                       0.992
-Model:                            OLS   Adj. R-squared:                  0.992
-Method:                 Least Squares   F-statistic:                     5625.
-Date:                Thu, 06 Dec 2018   Prob (F-statistic):          4.66e-291
-Time:                        14:38:26   Log-Likelihood:                -1325.4
-No. Observations:                 289   AIC:                             2663.
-Df Residuals:                     283   BIC:                             2685.
-Df Model:                           6                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-x1            -0.0099      0.001     -9.795      0.000      -0.012      -0.008
-x2             0.5694      0.050     11.431      0.000       0.471       0.667
-x3             1.1555      0.251      4.602      0.000       0.661       1.650
-x4            84.4159      2.206     38.266      0.000      80.074      88.758
-x5             4.9403      0.329     15.001      0.000       4.292       5.589
-x6            -0.1070      0.005    -23.602      0.000      -0.116      -0.098
-==============================================================================
-Omnibus:                       82.593   Durbin-Watson:                   2.029
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              756.990
-Skew:                          -0.857   Prob(JB):                    4.19e-165
-Kurtosis:                      10.741   Cond. No.                     1.27e+04
-==============================================================================
-
-Warnings:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 1.27e+04. This might indicate that there are
-strong multicollinearity or other numerical problems.
+git clone https://github.com/minzhou1003/electra-vehicle-range-prediction.git
 ```
 
-## 4. Other Machine Learning Model and Results.
+### 2. Set up and activate virtualenv inside that folder.
+```
+cd electra-vehicle-range-prediction
+virtualenv --python python3 env
+source env/bin/activate
+```
 
+### 3. Install python libraries:
+```
+pip install -r requirements.txt
+```
 
-## API sample output:
+### 4. Run the code:
+```
+python vehicle_prediction.py
+```
+
+### 5. API sample output:
 ```
 $ python vehicle_prediction.py 
 Please put the JSON file to "new_data" folder.
