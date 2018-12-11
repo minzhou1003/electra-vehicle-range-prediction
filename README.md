@@ -12,8 +12,9 @@ Electra Vehicles Inc:
 - Fabrizio Martini(fmartini@electravehicles.com )
 - Jake Berliner(jberliner@electravehicles.com )
 
-[Our poster](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/eletra_poster.pdf)
-[Final Report](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/electra_final_report.pdf)
+See our [poster](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/eletra_poster.pdf)
+
+See [final report](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/electra_final_report.pdf)
 
 
 # File Instructions:
@@ -22,7 +23,9 @@ Electra Vehicles Inc:
 - `trained_models` folder contains all trained models
 - `new_data` folder contains sample input JSON files
 - `figs` folder contains some useful images
-- `docs` folder contains [poster](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/eletra_poster.pdf) and final report.
+- `docs` folder contains [poster](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/eletra_poster.pdf) and [final report](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/electra_final_report.pdf).
+
+.
 
 
 # Introduction:
