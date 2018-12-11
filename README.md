@@ -25,8 +25,6 @@ See [final report](https://github.com/minzhou1003/electra-vehicle-range-predicti
 - `figs` folder contains some useful images
 - `docs` folder contains [poster](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/eletra_poster.pdf) and [final report](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/electra_final_report.pdf).
 
-.
-
 
 # Introduction:
 Electra Vehicles, Inc. is an innovative Boston-based startup developing and designing intelligent control software for energy storage systems. What sets Electra Vehicles apart is the ability to design and control dual chemistry systems through our Ai-based control algorithms. Electra was one of the top-26 teams at the MassChallenge startup incubator in 2016 and is a part of the Massachusetts Clean Energy Center's AccelerateMass program to support the adoption of innovative clean technology in Massachusetts. In this project, we are working with Electra Vehicles on predicting electric vehicle range from provided system specifications. The vehicle range is defined as how far can you drive on a full charge. However, there are uncertainties that make this difficult.
