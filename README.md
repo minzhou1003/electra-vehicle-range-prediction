@@ -66,13 +66,14 @@ Only showing the absolute coefficients above 0.65, otherwise 0.
 ## 2. Significant features:
 
 By using statistical methods, we compared the importance of each feature as follows:
-![feature_importances](figs/feature_importance.png)
+<img src="figs/feature_importance.png" alt="feature_importances" width="600"/>
 
 We also presented the top 12 feature distributions respects to system range:
 ![features](figs/features.png)
 
 ## 4. Model Perfomance Comparison:
-![models](figs/models.png)
+<img src="figs/models.png" alt="models" width="600"/>
+
 
 ## 3. OLS Linear Regression Model
 The partial regression visulization:
