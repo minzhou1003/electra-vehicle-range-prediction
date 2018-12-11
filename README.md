@@ -12,6 +12,10 @@ Electra Vehicles Inc:
 - Fabrizio Martini(fmartini@electravehicles.com )
 - Jake Berliner(jberliner@electravehicles.com )
 
+[Our poster](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/eletra_poster.pdf)
+[Final Report](https://github.com/minzhou1003/electra-vehicle-range-prediction/blob/master/docs/electra_final_report.pdf)
+
+
 # File Instructions:
 - `vehicle_range_prediction.ipynb` is the Jupyter Notebook for developing models
 - `vehicle_prediction.py` is the python script of prediction API
